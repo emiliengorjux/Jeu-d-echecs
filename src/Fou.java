@@ -1,4 +1,4 @@
-import javax.swing.*;
+import javax.swing.ImageIcon;
 
 public class Fou extends Pieces {
     public Fou(Couleur couleur, int x, int y, ImageIcon image) {
@@ -17,6 +17,11 @@ public class Fou extends Pieces {
             return false;
         }
 
+        // Vérifier si la pièce ne bouge pas
+        if (newX == x && newY == y) {
+            return false;
+        }
+
         int stepX = (newX > x) ? 1 : -1;
         int stepY = (newY > y) ? 1 : -1;
 
@@ -25,6 +30,11 @@ public class Fou extends Pieces {
 
         // Vérifier si le chemin est libre
         while (currentX != newX || currentY != newY) {
+            // Vérifier si les coordonnées sont valides
+            if (currentX < 0 || currentX >= 8 || currentY < 0 || currentY >= 8) {
+                return false;
+            }
+
             if (echiquier[currentX][currentY] != null) {
                 return false;
             }
@@ -40,4 +50,3 @@ public class Fou extends Pieces {
         return true;
     }
 }
-
